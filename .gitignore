@@ -1,0 +1,8 @@
+build/
+dist/
+.idea/
+.gradle/
+gpg.gpg
+gradle.properties
+gradle.suoyan.properties
+secring.gpg
