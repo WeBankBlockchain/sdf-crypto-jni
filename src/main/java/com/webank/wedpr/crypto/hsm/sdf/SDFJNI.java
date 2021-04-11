@@ -94,15 +94,17 @@ public class SDFJNI {
 
     public static final native long Sign(String jarg1, int jarg2, String jarg3);
 
-    public static final native long SignWithInnerKey(
+    public static final native long SignWithInternalKey(
             long jarg1, String jarg2, int jarg3, String jarg4);
 
     public static final native long Verify(String jarg1, int jarg2, String jarg3, String jarg4);
 
-    public static final native long VerifyWithInnerKey(
+    public static final native long VerifyWithInternalKey(
             long jarg1, int jarg2, String jarg3, String jarg4);
 
     public static final native long Hash(String jarg1, int jarg2, String jarg3);
+
+    public static final native long ExportInternalPublicKey(long jarg1, int jarg2);
 
     static {
         try {

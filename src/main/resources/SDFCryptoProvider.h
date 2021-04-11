@@ -90,6 +90,96 @@ private:
     bool m_isInternalKey = false;
 };
 
+/*
+class SessionPool
+{
+public:
+    SessionPool(int size, void * deviceHandle);
+    virtual ~SessionPool();
+    void * GetSession();
+    void ReturnSession(void * session);
+
+
+private:
+    void * m_deviceHandle;
+    size_t m_size;
+    std::list<void *> m_pool;
+};
+*/
+
+/**
+ *  SDFCryptoProvider suply SDF function calls
+ *  Singleton
+ */
+/*class SDFCryptoProvider
+{
+private:
+    void * m_deviceHandle;
+    SessionPool* m_sessionPool;
+    SDFCryptoProvider();
+    ~SDFCryptoProvider();
+    SDFCryptoProvider(const SDFCryptoProvider&);
+    SDFCryptoProvider& operator=(const SDFCryptoProvider&);
+    // std::mutex mut;
+
+public:
+    *//**
+     * Return the instance
+     *//*
+    static SDFCryptoProvider& GetInstance();
+
+    *//**
+     * Generate key
+     * Return error code
+     *//*
+    unsigned int KeyGen(AlgorithmType algorithm, Key* key);
+
+    *//**
+     * Sign
+     *//*
+    unsigned int Sign(Key const& key, AlgorithmType algorithm, unsigned char const* digest,
+        unsigned int const digestLen, unsigned char* signature, unsigned int* signatureLen);
+
+    *//**
+     * Verify signature
+     *//*
+    unsigned int Verify(Key const& key, AlgorithmType algorithm, unsigned char const* digest,
+        unsigned int const digestLen, unsigned char const* signature,
+        unsigned int const signatureLen, bool* result);
+
+    *//**
+     * Make hash
+     *//*
+    unsigned int Hash(Key* key, AlgorithmType algorithm, unsigned char const* message,
+        unsigned int const messageLen, unsigned char*  digest, unsigned int* digestLen);
+
+    *//**
+     * Encrypt
+     *//*
+    unsigned int Encrypt(Key const& key, AlgorithmType algorithm, unsigned char const* plantext,
+        unsigned int const plantextLen, unsigned char* cyphertext, unsigned int* cyphertextLen);
+
+    *//**
+     * Decrypt
+     *//*
+    unsigned int Decrypt(Key const& key, AlgorithmType algorithm, unsigned char const* cyphertext,
+        unsigned int const cyphertextLen, unsigned char* plantext, unsigned int* plantextLen);
+
+    *//**
+     * Make sm3 hash with z value
+     *//*
+    unsigned int HashWithZ(Key* key, AlgorithmType algorithm, unsigned char const* zValue,
+        unsigned int const zValueLen, unsigned char const* message, unsigned int const messageLen,
+        unsigned char* digest, unsigned int* digestLen);
+
+    *//**
+     *  Get public key of an internal key
+     *//*
+    unsigned int ExportInternalPublicKey(Key & key, AlgorithmType algorithm);
+    
+    static char * GetErrorMessage(unsigned int code);
+};*/
+
 struct SDFCryptoResult{
     char * signature;
     char * publicKey;
@@ -101,19 +191,20 @@ struct SDFCryptoResult{
 
 SDFCryptoResult KeyGen(AlgorithmType algorithm);
 SDFCryptoResult Sign(char * privateKey, AlgorithmType algorithm, char const* digest);
-SDFCryptoResult SignWithInnerKey(unsigned int keyIndex, char * password, AlgorithmType algorithm, char const* digest);
+SDFCryptoResult SignWithInternalKey(unsigned int keyIndex, char * password, AlgorithmType algorithm, char const* digest);
 SDFCryptoResult Verify(char * publicKey, AlgorithmType algorithm, char const* digest, char const* signature);
-SDFCryptoResult VerifyWithInnerKey(unsigned int keyIndex, AlgorithmType algorithm, char const* digest,char const* signature);
+SDFCryptoResult VerifyWithInternalKey(unsigned int keyIndex, AlgorithmType algorithm, char const* digest,char const* signature);
 SDFCryptoResult Hash(char * key, AlgorithmType algorithm, char const* message);
+SDFCryptoResult ExportInternalPublicKey(unsigned int keyIndex, AlgorithmType algorithm);
 
 
-//SDFCryptoResult HashWithZ(char * key, AlgorithmType algorithm, char const* message);
-//SDFCryptoResult makeResult(char * signature,char * publicKey,char * privateKey,bool result,char * hash,unsigned int code,char*);
-//char * toHex(unsigned char *data, int len);
-//std::vector<uint8_t> fromHex(char * hexString);
-//int fromHexChar(char _i);
-//unsigned int getHexByteLen(char * hexString);
-//int PrintData(char*,unsigned char*,unsigned int, unsigned int);
-//int SearchData(unsigned char *, unsigned int , unsigned int);
+/*SDFCryptoResult HashWithZ(char * key, AlgorithmType algorithm, char const* message);
+SDFCryptoResult makeResult(char * signature,char * publicKey,char * privateKey,bool result,char * hash,unsigned int code,char*);
+char * toHex(unsigned char *data, int len);
+std::vector<uint8_t> fromHex(char * hexString);
+int fromHexChar(char _i);
+unsigned int getHexByteLen(char * hexString);
+int PrintData(char*,unsigned char*,unsigned int, unsigned int);
+int SearchData(unsigned char *, unsigned int , unsigned int);*/
 }  // namespace crypto
 }  // namespace dev

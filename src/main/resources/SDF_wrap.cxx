@@ -789,7 +789,7 @@ SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_Sign(JNIEnv
 }
 
 
-SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_SignWithInnerKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg2, jint jarg3, jstring jarg4) {
+SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_SignWithInternalKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg2, jint jarg3, jstring jarg4) {
   jlong jresult = 0 ;
   unsigned int arg1 ;
   char *arg2 = (char *) 0 ;
@@ -811,7 +811,7 @@ SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_SignWithInn
     arg4 = (char *)jenv->GetStringUTFChars(jarg4, 0);
     if (!arg4) return 0;
   }
-  result = dev::crypto::SignWithInnerKey(arg1,arg2,arg3,(char const *)arg4);
+  result = dev::crypto::SignWithInternalKey(arg1,arg2,arg3,(char const *)arg4);
   *(dev::crypto::SDFCryptoResult **)&jresult = new dev::crypto::SDFCryptoResult((const dev::crypto::SDFCryptoResult &)result); 
   if (arg2) jenv->ReleaseStringUTFChars(jarg2, (const char *)arg2);
   if (arg4) jenv->ReleaseStringUTFChars(jarg4, (const char *)arg4);
@@ -854,7 +854,7 @@ SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_Verify(JNIE
 }
 
 
-SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_VerifyWithInnerKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jstring jarg3, jstring jarg4) {
+SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_VerifyWithInternalKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jstring jarg3, jstring jarg4) {
   jlong jresult = 0 ;
   unsigned int arg1 ;
   dev::crypto::AlgorithmType arg2 ;
@@ -876,7 +876,7 @@ SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_VerifyWithI
     arg4 = (char *)jenv->GetStringUTFChars(jarg4, 0);
     if (!arg4) return 0;
   }
-  result = dev::crypto::VerifyWithInnerKey(arg1,arg2,(char const *)arg3,(char const *)arg4);
+  result = dev::crypto::VerifyWithInternalKey(arg1,arg2,(char const *)arg3,(char const *)arg4);
   *(dev::crypto::SDFCryptoResult **)&jresult = new dev::crypto::SDFCryptoResult((const dev::crypto::SDFCryptoResult &)result); 
   if (arg3) jenv->ReleaseStringUTFChars(jarg3, (const char *)arg3);
   if (arg4) jenv->ReleaseStringUTFChars(jarg4, (const char *)arg4);
@@ -908,6 +908,22 @@ SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_Hash(JNIEnv
   *(dev::crypto::SDFCryptoResult **)&jresult = new dev::crypto::SDFCryptoResult((const dev::crypto::SDFCryptoResult &)result); 
   if (arg1) jenv->ReleaseStringUTFChars(jarg1, (const char *)arg1);
   if (arg3) jenv->ReleaseStringUTFChars(jarg3, (const char *)arg3);
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_webank_wedpr_crypto_hsm_sdf_SDFJNI_ExportInternalPublicKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  unsigned int arg1 ;
+  dev::crypto::AlgorithmType arg2 ;
+  dev::crypto::SDFCryptoResult result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (unsigned int)jarg1; 
+  arg2 = (dev::crypto::AlgorithmType)jarg2; 
+  result = dev::crypto::ExportInternalPublicKey(arg1,arg2);
+  *(dev::crypto::SDFCryptoResult **)&jresult = new dev::crypto::SDFCryptoResult((const dev::crypto::SDFCryptoResult &)result); 
   return jresult;
 }
 

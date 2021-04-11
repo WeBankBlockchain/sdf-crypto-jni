@@ -92,7 +92,7 @@ public class Main {
 
         System.out.println("*********SignWithInnerKey*********");
         SDFCryptoResult signInResult =
-                SDF.SignWithInnerKey(1, "123456", AlgorithmType.SM2, hashResult.getHash());
+                SDF.SignWithInternalKey(1, "123456", AlgorithmType.SM2, hashResult.getHash());
         if (signInResult.getSdfErrorMessage() != null) {
             System.out.println(signInResult.getSdfErrorMessage());
         } else {
@@ -101,12 +101,20 @@ public class Main {
 
         System.out.println("*********VerifyWithInnerKey*********");
         SDFCryptoResult verifyInResult =
-                SDF.VerifyWithInnerKey(
+                SDF.VerifyWithInternalKey(
                         1, AlgorithmType.SM2, hashResult.getHash(), signInResult.getSignature());
         if (verifyInResult.getSdfErrorMessage() != null) {
             System.out.println(verifyInResult.getSdfErrorMessage());
         } else {
             System.out.println(verifyInResult.getResult());
+        }
+
+        System.out.println("*********GetInternalPublicKey*********");
+        SDFCryptoResult exportKeyResult = SDF.ExportInternalPublicKey(1, AlgorithmType.SM2);
+        if (exportKeyResult.getSdfErrorMessage() != null) {
+            System.out.println(exportKeyResult.getSdfErrorMessage());
+        } else {
+            System.out.println(exportKeyResult.getPublicKey());
         }
     }
 }

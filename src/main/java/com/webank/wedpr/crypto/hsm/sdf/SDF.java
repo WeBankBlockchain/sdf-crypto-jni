@@ -17,10 +17,11 @@ public class SDF {
         return new SDFCryptoResult(SDFJNI.Sign(privateKey, algorithm.swigValue(), digest), true);
     }
 
-    public static SDFCryptoResult SignWithInnerKey(
+    public static SDFCryptoResult SignWithInternalKey(
             long keyIndex, String password, AlgorithmType algorithm, String digest) {
         return new SDFCryptoResult(
-                SDFJNI.SignWithInnerKey(keyIndex, password, algorithm.swigValue(), digest), true);
+                SDFJNI.SignWithInternalKey(keyIndex, password, algorithm.swigValue(), digest),
+                true);
     }
 
     public static SDFCryptoResult Verify(
@@ -29,14 +30,19 @@ public class SDF {
                 SDFJNI.Verify(publicKey, algorithm.swigValue(), digest, signature), true);
     }
 
-    public static SDFCryptoResult VerifyWithInnerKey(
+    public static SDFCryptoResult VerifyWithInternalKey(
             long keyIndex, AlgorithmType algorithm, String digest, String signature) {
         return new SDFCryptoResult(
-                SDFJNI.VerifyWithInnerKey(keyIndex, algorithm.swigValue(), digest, signature),
+                SDFJNI.VerifyWithInternalKey(keyIndex, algorithm.swigValue(), digest, signature),
                 true);
     }
 
     public static SDFCryptoResult Hash(String key, AlgorithmType algorithm, String message) {
         return new SDFCryptoResult(SDFJNI.Hash(key, algorithm.swigValue(), message), true);
+    }
+
+    public static SDFCryptoResult ExportInternalPublicKey(long keyIndex, AlgorithmType algorithm) {
+        return new SDFCryptoResult(
+                SDFJNI.ExportInternalPublicKey(keyIndex, algorithm.swigValue()), true);
     }
 }
